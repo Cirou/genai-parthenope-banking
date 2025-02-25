@@ -1,0 +1,82 @@
+<div class="transaction-list-card">
+  <div class="transaction-header">
+    <h2>Movimenti</h2>
+    <button class="export-button" (click)="exportTransactions()">
+      Esporta
+    </button>
+  </div>
+
+  <div class="filters">
+    <form [formGroup]="filterForm">
+      <div class="filter-group">
+        <label>Da:</label>
+        <input type="date" formControlName="dateFrom">
+      </div>
+      <div class="filter-group">
+        <label>A:</label>
+        <input type="date" formControlName="dateTo">
+      </div>
+      <div class="filter-group">
+        <label>Tipo:</label>
+        <select formControlName="type">
+          <option value="">Tutti</option>
+          <option value="credit">Entrate</option>
+          <option value="debit">Uscite</option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  @if (loading) {
+    <div class="loading">Caricamento transazioni...</div>
+  } @else if (error) {
+    <div class="error">{{error}}</div>
+  } @else if (filteredTransactions.length) {
+    <div class="transactions-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Descrizione</th>
+            <th>Importo</th>
+            <th>Saldo</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (transaction of filteredTransactions; track transaction.id) {
+            <tr 
+              [class]="transaction.type"
+              (click)="showTransactionDetails(transaction)"
+            >
+              <td>{{transaction.date | date:'short'}}</td>
+              <td>{{transaction.description}}</td>
+              <td>{{transaction.amount | currency:'EUR'}}</td>
+              <td>{{transaction.balance | currency:'EUR'}}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="no-transactions">
+      Nessuna transazione trovata
+    </div>
+  }
+</div>
+
+@if (selectedTransaction) {
+  <div class="modal-overlay" (click)="closeTransactionDetails()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h3>Dettagli Transazione</h3>
+      <div class="transaction-details">
+        <p><strong>Data:</strong> {{selectedTransaction.date | date:'full'}}</p>
+        <p><strong>Tipo:</strong> {{selectedTransaction.type === 'credit' ? 'Entrata' : 'Uscita'}}</p>
+        <p><strong>Descrizione:</strong> {{selectedTransaction.description}}</p>
+        <p><strong>Categoria:</strong> {{selectedTransaction.category}}</p>
+        <p><strong>Importo:</strong> {{selectedTransaction.amount | currency:'EUR'}}</p>
+        <p><strong>Saldo dopo operazione:</strong> {{selectedTransaction.balance | currency:'EUR'}}</p>
+      </div>
+      <button class="close-button" (click)="closeTransactionDetails()">Chiudi</button>
+    </div>
+  </div>
+}
