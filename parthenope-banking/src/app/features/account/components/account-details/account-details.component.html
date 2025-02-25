@@ -1,0 +1,37 @@
+<div class="account-details-card">
+  @if (loading) {
+    <div class="loading">Caricamento...</div>
+  } @else if (error) {
+    <div class="error">{{error}}</div>
+  } @else if (account) {
+    <div class="account-header">
+      <h2>Dettagli Conto</h2>
+      <div class="account-number">N° {{account.accountNumber}}</div>
+    </div>
+
+    <div class="balance-section">
+      <div class="current-balance">
+        <span class="label">Saldo Disponibile</span>
+        <span class="amount">{{account.balance | currency:'EUR'}}</span>
+      </div>
+      <div class="last-update">
+        Ultimo aggiornamento: {{account.lastUpdate | date:'short'}}
+      </div>
+    </div>
+
+    <div class="account-info">
+      <div class="info-item">
+        <span class="label">Tipo Conto</span>
+        <span class="value">{{account.type}}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">IBAN</span>
+        <span class="value">{{account.iban}}</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Data Apertura</span>
+        <span class="value">{{account.openingDate | date}}</span>
+      </div>
+    </div>
+  }
+</div>
