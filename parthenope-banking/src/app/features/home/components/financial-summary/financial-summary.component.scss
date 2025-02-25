@@ -1,0 +1,67 @@
+.financial-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .balance-card, .transactions-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .balance-card {
+    h2 {
+      margin: 0 0 10px 0;
+      color: var(--gray-700);
+    }
+
+    .balance {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--bright-blue);
+      margin: 0;
+    }
+
+    .update-time {
+      color: var(--gray-400);
+      font-size: 0.8rem;
+      margin: 5px 0 0 0;
+    }
+  }
+
+  .transactions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-400);
+
+      &.credit .amount {
+        color: green;
+      }
+
+      &.debit .amount {
+        color: red;
+      }
+
+      .date {
+        color: var(--gray-700);
+        font-size: 0.9rem;
+      }
+
+      .description {
+        color: var(--gray-900);
+      }
+
+      .amount {
+        font-weight: bold;
+      }
+    }
+  }
+}
