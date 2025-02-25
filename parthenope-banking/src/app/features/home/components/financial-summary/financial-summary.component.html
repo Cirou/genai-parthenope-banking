@@ -1,0 +1,24 @@
+<div class="financial-summary">
+  <div class="balance-card">
+    <h2>Current Balance</h2>
+    @if (accountSummary) {
+      <p class="balance">{{accountSummary.balance | currency:accountSummary.currency}}</p>
+      <p class="update-time">Last updated: {{accountSummary.lastUpdate | date:'short'}}</p>
+    }
+  </div>
+
+  <div class="transactions-card">
+    <h2>Recent Transactions</h2>
+    @if (recentTransactions.length) {
+      <ul class="transactions-list">
+        @for (transaction of recentTransactions; track transaction.id) {
+          <li [class]="transaction.type">
+            <span class="date">{{transaction.date | date:'short'}}</span>
+            <span class="description">{{transaction.description}}</span>
+            <span class="amount">{{transaction.amount | currency}}</span>
+          </li>
+        }
+      </ul>
+    }
+  </div>
+</div>
