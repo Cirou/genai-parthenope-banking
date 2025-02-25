@@ -1,0 +1,67 @@
+$white: #ffffff;
+$light-gray: #f5f5f5;
+$text-color: #333333;
+
+.home-container {
+  min-height: 100vh;
+  background-color: $light-gray;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: $primary-color;
+  color: $white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .logout-button {
+    background: transparent;
+    border: 2px solid $white;
+    color: $white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: $white;
+      color: $primary-color;
+    }
+  }
+}
+
+.welcome-section {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h2 {
+    color: $primary-color;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  p {
+    color: $text-color;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-section {
+    margin: 40px 20px;
+    padding: 20px;
+  }
