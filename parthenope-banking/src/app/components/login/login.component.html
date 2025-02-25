@@ -1,0 +1,54 @@
+<div class="login-container">
+  <div class="login-box">
+    <div class="logo-container">
+      <img src="assets/logo.png" alt="Parthenope Banking Logo" class="logo">
+    </div>
+    
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <label for="username">Email</label>
+        <input 
+          type="email" 
+          id="username"
+          formControlName="username"
+          placeholder="Inserisci la tua email"
+          [class.error]="loginForm.get('username')?.invalid && loginForm.get('username')?.touched"
+        >
+        <div class="error-message" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+          <span *ngIf="loginForm.get('username')?.errors?.['required']">Inserire username</span>
+          <span *ngIf="loginForm.get('username')?.errors?.['email']">Inserire email valida</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+          type="password" 
+          id="password"
+          formControlName="password"
+          placeholder="Inserisci la tua password"
+          [class.error]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+        >
+        <div class="error-message" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <span>Inserire password</span>
+        </div>
+      </div>
+
+      <div class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <button 
+        type="submit" 
+        [disabled]="loginForm.invalid"
+        class="login-button"
+      >
+        Accedi
+      </button>
+
+      <a href="#" class="forgot-password" (click)="onForgotPassword()">
+        Password dimenticata?
+      </a>
+    </form>
+  </div>
+</div>
